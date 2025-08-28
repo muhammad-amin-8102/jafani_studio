@@ -8,16 +8,33 @@ const Home = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      
-      if (heroRef.current) {
-        heroRef.current.style.transform = `translateY(${scrolled * 0.5}px)`;
-      }
+    let running = true;
+    const rafId = { id: 0 } as { id: number };
+
+    const onScroll = () => {
+      // wake-up for rAF loop; we keep the loop running to continuously update
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const tick = () => {
+      if (!running) return;
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        const translate = Math.round(rect.top * -0.5);
+        heroRef.current.style.willChange = 'transform';
+        heroRef.current.style.transform = `translate3d(0, ${translate}px, 0)`;
+      }
+
+      rafId.id = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    rafId.id = requestAnimationFrame(tick);
+
+    return () => {
+      running = false;
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafId.id);
+    };
   }, []);
 
   const portfolioItems = [
@@ -85,7 +102,8 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-                Our <span className="text-amber-600">Vision</span>
+                {/* Our  */}
+                <span className="text-amber-600">Vision</span>
               </h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 At Jafani Design Studio, we believe that exceptional design has the power to 

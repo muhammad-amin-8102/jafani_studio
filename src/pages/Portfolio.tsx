@@ -56,12 +56,13 @@ const Portfolio = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <div className="pt-20">
+    <div className="">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-6xl font-light mb-6">
-            Our <span className="text-amber-400">Portfolio</span>
+            {/* Our  */}
+            <span className="text-amber-400">Portfolio</span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Explore our diverse collection of architectural and interior design projects 

@@ -14,22 +14,39 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   backgroundImage 
 }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      
-      const scrolled = window.pageYOffset;
-      const parallax = scrolled * speed;
-      
-      if (backgroundImage) {
-        sectionRef.current.style.transform = `translateY(${parallax}px)`;
-      }
+    if (!backgroundImage) return;
+
+    const rafId = { id: 0 } as { id: number };
+    let running = true;
+
+    // lightweight rAF loop + passive scroll listener
+    const onScroll = () => {
+      // nothing here — just wake the rAF loop which reads DOM once
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [speed]);
+    const tick = () => {
+      if (!running || !sectionRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      // rect.top moves as the page scrolls. We use translate3d for GPU acceleration.
+      const translate = Math.round(rect.top * -speed * 0.5);
+
+      sectionRef.current.style.willChange = 'transform';
+      sectionRef.current.style.transform = `translate3d(0, ${translate}px, 0)`;
+
+      rafId.id = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    rafId.id = requestAnimationFrame(tick);
+
+    return () => {
+      running = false;
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(rafId.id);
+    };
+  }, [speed, backgroundImage]);
 
   return (
     <div className={`relative overflow-hidden ${className}`}>

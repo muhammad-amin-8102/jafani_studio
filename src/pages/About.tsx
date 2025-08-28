@@ -27,27 +27,45 @@ const About = () => {
 
   const team = [
     {
-      name: "Architect Jafani",
-      role: "Principal Architect & Founder",
-      image: "/D5_Image 41_20230527_160653.png",
-      description: "With over 15 years of experience in architectural design and project management."
+      name: "Abdul Gani Saudagar",
+      role: "Principal Architect",
+      image: "/avatar1.svg",
+      description: "Leads the studio with a vision for design excellence, ensuring every project blends creativity with functionality."
     },
     {
-      name: "Design Team Lead",
-      role: "Senior Interior Designer",
-      image: "/LS1.png",
-      description: "Specializes in luxury residential and commercial interior design projects."
+      name: "Faisal Sarfarazi",
+      role: "Project Architect",
+      image: "/avatar2.svg",
+      description: "Specializes in design and execution, seamlessly connecting planning with on-site reality."
     },
     {
-      name: "Structural Engineer",
-      role: "Lead Structural Engineer",
-      image: "/D5_Image 27_20230527_151214.png",
-      description: "Expert in innovative structural solutions and sustainable building practices."
+      name: "Abdul Jabbar",
+      role: "Associate Architect",
+      image: "/avatar1.svg",
+      description: "Brings technical expertise and design clarity, shaping ideas into practical solutions."
+    },
+    {
+      name: "Sohail Mistry",
+      role: "Interior Designer",
+      image: "/avatar2.svg",
+      description: " Transforms spaces with thoughtful interiors that balance aesthetics and comfort."
+    },
+    {
+      name: "Kaif Pawar",
+      role: "3D Visualizer",
+      image: "/avatar1.svg",
+      description: "Creates stunning visualizations, turning concepts into immersive and realistic experiences."
+    },
+    {
+      name: "Zeeshan Ahmed",
+      role: "Business Development",
+      image: "/avatar2.svg",
+      description: "Drives growth and partnerships, building strong client relationships for the studio."
     }
   ];
 
   return (
-    <div className="pt-20">
+    <div className="">
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,9 +75,9 @@ const About = () => {
                 About <span className="text-amber-400">Jafani Design Studio</span>
               </h1>
               <p className="text-xl text-gray-300 leading-relaxed">
-                Founded with a vision to transform spaces and create extraordinary experiences, 
-                Jafani Design Studio has been at the forefront of architectural and interior 
-                design innovation in India.
+                At Jafani Design Studio, we are a young and enthusiastic team of architects and designers driven by creativity, innovation, and precision. 
+                With strong collaborations and tie-ups with leading firms, we have successfully delivered diverse projects and unique products that redefine spaces with fresh perspectives.
+
               </p>
             </div>
             <div className="relative">
